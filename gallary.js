@@ -8,21 +8,26 @@ const closeModal = document.querySelector(".lightbox__button");
 
 gallaryList.insertAdjacentHTML("afterbegin", developGallary);
 let currentLi;
- gallaryList.addEventListener("click", onPictureGallaryClick);
- closeModal.addEventListener("click", onCloseBtnClick);
+gallaryList.addEventListener("click", onPictureGallaryClick);
+closeModal.addEventListener("click", onCloseBtnClick);
 
 function createGallary(images) {
   return images
     .map(({ preview, original, description }) => {
       return `
-        <li class="gallery__item">
-        <img
-          class="gallery__image"
-          src="${preview}"
-          data-source="${original}"
-          alt="${description}"
-        />
-        </li>
+   <li class="gallery__item">
+       <a
+       class="gallery__link"
+       href="${preview}"
+      >
+   <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>
         `;
     })
     .join("");
@@ -33,49 +38,43 @@ function onPictureGallaryClick(evt) {
     return;
   }
   currentLi = evt.target.parentNode;
-  openModal.classList.add('is-open');
+  openModal.classList.add("is-open");
   modalPicture.src = evt.target.dataset.source;
-  window.addEventListener('keydown', onEscOverlayPres)
-  window.addEventListener('keydown', onBtnArrowClick)
-  
+  window.addEventListener("keydown", onEscOverlayPres);
+  window.addEventListener("keydown", onBtnArrowClick);
 }
 
 function onCloseBtnClick(evt) {
-  window.removeEventListener('keydown', onEscOverlayPres)
-  window.removeEventListener('keydown', onBtnArrowClick)
-  openModal.classList.remove('is-open')
-  modalPicture.src = '';
+  window.removeEventListener("keydown", onEscOverlayPres);
+  window.removeEventListener("keydown", onBtnArrowClick);
+  openModal.classList.remove("is-open");
+  modalPicture.src = "";
 }
 
-const overlay = document.querySelector('.lightbox__overlay');
-overlay.addEventListener('click', onCloseBtnClick);
+const overlay = document.querySelector(".lightbox__overlay");
+overlay.addEventListener("click", onCloseBtnClick);
 
-function onEscOverlayPres(event){
-        console.log(event) 
-        if(event.code === 'Escape'){
-            onCloseModalBtnClick();
-        }
+function onEscOverlayPres(event) {
+  if (event.code === "Escape") {
+    onCloseModalBtnClick();
+  }
 }
-
 function onBtnArrowClick(event) {
-  if (event.code === 'ArrowRight') {
-    let pressOnBtnLeft = currentEventLi.nextElementSibling
+  if (event.code === "ArrowRight") {
+    let pressOnBtnLeft = currentEventLi.nextElementSibling;
     if (!pressOnBtnLeft) {
-      pressOnBtnLeft = gallaryList.firstElementChild
+      pressOnBtnLeft = gallaryList.firstElementChild;
     }
-    modalPicture.src = pressOnBtnLeft.lastElementChild.dataset.source
-    currentEventLi = pressOnBtnLeft
-  } 
- 
-    if(event.code=== 'ArrowLeft'){
-        let pressOnBtnRight = currentEventLi.previousElementSibling
-        if(!pressOnBtnRight){
-            pressOnBtnRight=galleryContainer.lastElementChild
-        }
-        pictureModal.src = pressOnBtnRight.lastElementChild.dataset.source
-        currentEventLi = pressOnBtnRight;
+    modalPicture.src = pressOnBtnLeft.lastElementChild.dataset.source;
+    currentEventLi = pressOnBtnLeft;
+  }
+
+  if (event.code === "ArrowLeft") {
+    let pressOnBtnRight = currentEventLi.previousElementSibling;
+    if (!pressOnBtnRight) {
+      pressOnBtnRight = galleryContainer.lastElementChild;
     }
+    pictureModal.src = pressOnBtnRight.lastElementChild.dataset.source;
+    currentEventLi = pressOnBtnRight;
+  }
 }
-
-
-
