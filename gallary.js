@@ -34,7 +34,8 @@ function createGallary(images) {
 }
 
 function onPictureGallaryClick(evt) {
-  if (!evt.target.classList.contains("gallary__image")) {
+  evt.preventDefault()
+  if (!evt.target.classList.contains("gallery__image")) {
     return;
   }
   currentLi = evt.target.parentNode;
