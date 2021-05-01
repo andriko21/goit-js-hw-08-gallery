@@ -38,7 +38,7 @@ function onPictureGallaryClick(evt) {
   if (!evt.target.classList.contains("gallery__image")) {
     return;
   }
-  currentLi = evt.target.parentNode;
+  currentLi = evt.target.closest('.gallery__image ');
   openModal.classList.add("is-open");
   modalPicture.src = evt.target.dataset.source;
   window.addEventListener("keydown", onEscOverlayPres);
@@ -57,9 +57,10 @@ overlay.addEventListener("click", onCloseBtnClick);
 
 function onEscOverlayPres(event) {
   if (event.code === "Escape") {
-    onCloseModalBtnClick();
+    onCloseBtnClick();
   }
 }
+
 function onBtnArrowClick(event) {
   if (event.code === "ArrowRight") {
     let pressOnBtnLeft = currentEventLi.nextElementSibling;
