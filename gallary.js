@@ -7,9 +7,11 @@ const openModal = document.querySelector(".lightbox");
 const closeModal = document.querySelector(".lightbox__button");
 
 gallaryList.insertAdjacentHTML("afterbegin", developGallary);
-let currentLi;
+let currentEventLi;
 gallaryList.addEventListener("click", onPictureGallaryClick);
 closeModal.addEventListener("click", onCloseBtnClick);
+const overlay = document.querySelector(".lightbox__overlay");
+overlay.addEventListener("click", onCloseBtnClick);
 
 function createGallary(images) {
   return images
@@ -38,7 +40,7 @@ function onPictureGallaryClick(evt) {
   if (!evt.target.classList.contains("gallery__image")) {
     return;
   }
-  currentLi = evt.target.closest('.gallery__image ');
+  currentEventLi = evt.target.closest('.gallery__image ');
   openModal.classList.add("is-open");
   modalPicture.src = evt.target.dataset.source;
   window.addEventListener("keydown", onEscOverlayPres);
@@ -52,8 +54,7 @@ function onCloseBtnClick(evt) {
   modalPicture.src = "";
 }
 
-const overlay = document.querySelector(".lightbox__overlay");
-overlay.addEventListener("click", onCloseBtnClick);
+
 
 function onEscOverlayPres(event) {
   if (event.code === "Escape") {

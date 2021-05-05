@@ -121,7 +121,7 @@ body {
   height: 48px;
   padding: 0;
   margin: 0;
-  border: none;
+  border: 5px solid #fff;
   border-radius: 50%;
   background-color: transparent;
   color: #fff;
@@ -136,5 +136,5 @@ body {
 
 .lightbox__button:hover,
 .lightbox__button:focus {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
 }
