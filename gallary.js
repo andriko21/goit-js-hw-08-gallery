@@ -36,11 +36,11 @@ function createGallary(images) {
 }
 
 function onPictureGallaryClick(evt) {
-  evt.preventDefault()
+  evt.preventDefault();
   if (!evt.target.classList.contains("gallery__image")) {
     return;
   }
-  currentEventLi = evt.target.closest('.gallery__image ');
+  currentEventLi = evt.target.closest(".gallery__image");
   openModal.classList.add("is-open");
   modalPicture.src = evt.target.dataset.source;
   window.addEventListener("keydown", onEscOverlayPres);
@@ -54,8 +54,6 @@ function onCloseBtnClick(evt) {
   modalPicture.src = "";
 }
 
-
-
 function onEscOverlayPres(event) {
   if (event.code === "Escape") {
     onCloseBtnClick();
@@ -64,20 +62,24 @@ function onEscOverlayPres(event) {
 
 function onBtnArrowClick(event) {
   if (event.code === "ArrowRight") {
-    let pressOnBtnLeft = currentEventLi.nextElementSibling;
+    let pressOnBtnLeft =
+      currentEventLi.parentElement.parentElement.nextElementSibling;
     if (!pressOnBtnLeft) {
       pressOnBtnLeft = gallaryList.firstElementChild;
     }
-    modalPicture.src = pressOnBtnLeft.lastElementChild.dataset.source;
-    currentEventLi = pressOnBtnLeft;
+    modalPicture.src =
+      pressOnBtnLeft.lastElementChild.lastElementChild.dataset.source;
+    currentEventLi = pressOnBtnLeft.lastElementChild.lastElementChild;
   }
 
   if (event.code === "ArrowLeft") {
-    let pressOnBtnRight = currentEventLi.previousElementSibling;
+    let pressOnBtnRight =
+      currentEventLi.parentElement.parentElement.previousElementSibling;
     if (!pressOnBtnRight) {
-      pressOnBtnRight = galleryContainer.lastElementChild;
+      pressOnBtnRight = gallaryList.lastElementChild;
     }
-    pictureModal.src = pressOnBtnRight.lastElementChild.dataset.source;
-    currentEventLi = pressOnBtnRight;
+    modalPicture.src =
+      pressOnBtnRight.lastElementChild.lastElementChild.dataset.source;
+    currentEventLi = pressOnBtnRight.lastElementChild.lastElementChild;
   }
 }
